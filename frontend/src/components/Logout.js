@@ -1,6 +1,15 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { logOut } from '../utils/auth';
 
 export default function Logout() {
-    logOut();
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        logOut();
+        navigate('/');
+    }, []);
+
     return <></>;
 }

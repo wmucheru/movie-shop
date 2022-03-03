@@ -1,4 +1,3 @@
-import { Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const COOKIE_USER = 'user';
@@ -11,10 +10,6 @@ const USERNAME_ADMIN = 'admin';
 const UserTypes = {
     ADMIN: 'admin',
     CUSTOMER: 'customer'
-}
-
-export const redirect = (path) => { 
-    <Navigate to={ path } />
 }
 
 export const validateLogin = (username) => {
@@ -66,20 +61,26 @@ export const login = (username) => {
     }
 
     // Save cookie
-    Cookies.set(COOKIE_USER, {
+    const user = {
         username,
         type: userType
-    });
+    }
 
-    redirect(redirectPath);
+    Cookies.set(COOKIE_USER, JSON.stringify(user));
+
+    return redirectPath;
+}
+
+export const getUser = () => {
+    const user = Cookies.get(COOKIE_USER);
+    return user !== undefined ? JSON.parse(user) : {};
 }
 
 export const isLoggedIn = () => {
-    const user = Cookies.get(COOKIE_USER);
-    return user !== undefined && user.hasOwnProperty('username');
+    const user = getUser();
+    return user.hasOwnProperty('username');
 }
 
 export const logOut = () => {
     Cookies.remove(COOKIE_USER);
-    redirect('/');
 }

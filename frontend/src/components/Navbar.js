@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 
+import { getUser } from '../utils/auth';
+
 export default function Navbar() {
+    const user = getUser();
 
     return (
         <nav className="navbar navbar-default" role="navigation">
@@ -22,6 +25,7 @@ export default function Navbar() {
                     </li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
+                    <li>{ user.username }</li>
                     <li>
                         <Link to="/logout">Logout</Link>
                     </li>

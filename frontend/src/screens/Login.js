@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { validateLogin, login, isLoggedIn } from '../utils/auth'
 
@@ -11,6 +12,8 @@ export default function Login() {
         error: false,
         text: ''
     });
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         if (isLoggedIn()) {
@@ -27,7 +30,8 @@ export default function Login() {
             setMessage(message);
         }
         else {
-            login(username);
+            const redirectURL = login(username);
+            navigate(redirectURL);
         }
     }
 

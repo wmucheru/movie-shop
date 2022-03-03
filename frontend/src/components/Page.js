@@ -9,6 +9,8 @@ export default function Page ({ children, title='Movie Shop' }) {
         document.title = title;
     }, [title]);
 
+    console.log('Render page')
+
     return (
         <div className="clearfix">
             { isLoggedIn() ? <Navbar /> : null }
