@@ -9,7 +9,7 @@ export default function Logout() {
     useEffect(() => {
         logOut();
         navigate('/');
-    }, []);
+    });
 
     return <></>;
 }

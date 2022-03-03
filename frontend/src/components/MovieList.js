@@ -16,8 +16,9 @@ export default function MovieList() {
                 if (response.statusCode === 200) {
                     return response.json();
                 }
-
-                setMessage('Could not fetch movies');
+                else {
+                    setMessage('Could not fetch movies');
+                }
 
                 throw Error(response.statusText);
             })
@@ -50,8 +51,8 @@ export default function MovieList() {
 
     return (
         <>
-            { message !== '' ? <Alert text={ message } type="danger" /> : null }
             { loading ? <div className="text-info">Loading...</div> : buildList(movies) }
+            { message !== '' ? <Alert text={ message } type="danger" /> : null }
         </>
     )
 }

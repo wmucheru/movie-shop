@@ -1,9 +1,12 @@
 import { useState } from 'react';
 
+import Alert from './Alert';
+
 import { MOVIES_URL } from '../utils/urls';
 
 export default function MovieForm() {
     const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState('');
     const [movie, setMovie] = useState({
         title: '',
         type: '',
@@ -27,20 +30,25 @@ export default function MovieForm() {
             },
             body: JSON.stringify(movie)
         })
-            .then(response => {
-                if (response.statusCode === 200) {
-                    return response.json();
-                }
+        .then(response => {
+            if (response.statusCode === 200) {
+                return response.json();
+            }
+            else {
+                setMessage('Could not save movie');
+            }
 
-                throw Error(response.statusText);
-            })
-            .then(response => {
-                setMovie(response);
-                setLoading(false);
-            })
-            .catch(e => {
-                setLoading(false);
-            });
+            throw Error(response.statusText);
+        })
+        .then(response => {
+            setMovie(response);
+            setMessage(response);
+            setLoading(false);
+        })
+        .catch(e => {
+            setMessage('Error saving movie');
+            setLoading(false);
+        });
     }
 
     const onChange = (e) => {
@@ -63,6 +71,9 @@ export default function MovieForm() {
             <form
                 className="form-horizontal movie-form col-sm-6"
                 onSubmit={onSubmit}>
+
+                {loading ? <Alert text="Saving..." /> : null}
+                {message ? <Alert text={message} /> : null}
 
                 <div className="form-group">
                     <label htmlFor="title" className="control-label col-sm-4">Title</label>
