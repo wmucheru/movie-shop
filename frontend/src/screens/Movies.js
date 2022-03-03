@@ -1,13 +1,13 @@
+import { useEffect, useState } from 'react';
+
 import Page from '../components/Page';
 import MovieList from '../components/MovieList';
-import MovieForm from '../components/MovieForm';
 
-export default function Admin() {
+export default function Movies() {
 
     return (
-        <Page title="Admin">
+        <Page title="Movies">
             <MovieList />
-            <MovieForm />
         </Page>
-    );
+    )
 }

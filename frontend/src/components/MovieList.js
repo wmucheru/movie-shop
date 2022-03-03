@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import BlankState from '../components/BlankState';
+import Alert from '../components/Alert';
 import MovieCard from '../components/MovieCard';
 
 export default function MovieList() {
@@ -27,7 +27,7 @@ export default function MovieList() {
 
     const buildList = (movies) => {
         if (movies !== undefined && movies.length > 0) {
-            return <BlankState message="No movies added" />;
+            return <Alert message="No movies added" />;
         }
 
         return (
