@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 import { isLoggedIn } from '../utils/auth';
 
-export const Page = ({ children, title='Movie Shop' }) => {
+export default function Page ({ children, title='Movie Shop' }) {
     useEffect(() => {
         document.title = title;
     }, [title]);

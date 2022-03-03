@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import Alert from '../components/Alert';
-import MovieCard from '../components/MovieCard';
+import Alert from './Alert';
+import MovieCard from './MovieCard';
 
 export default function MovieList() {
     const [loading, setLoading] = useState(true);

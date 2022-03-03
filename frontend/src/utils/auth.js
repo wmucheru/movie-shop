@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const COOKIE_USER = 'user';
@@ -11,6 +11,10 @@ const USERNAME_ADMIN = 'admin';
 const UserTypes = {
     ADMIN: 'admin',
     CUSTOMER: 'customer'
+}
+
+export const redirect = (path) => { 
+    <Navigate to={ path } />
 }
 
 export const validateLogin = (username) => {
@@ -49,13 +53,16 @@ export const login = (username) => {
         case USERNAME_ADMIN:
             userType = UserTypes.ADMIN;
             redirectPath = '/admin';
+            break;
 
         case USERNAME_CUSTOMER:
             userType = UserTypes.CUSTOMER;
             redirectPath = '/movies';
+            break;
 
         default:
             userType = '';
+            break;
     }
 
     // Save cookie
@@ -64,7 +71,7 @@ export const login = (username) => {
         type: userType
     });
 
-    <Redirect to={ redirectPath } />
+    redirect(redirectPath);
 }
 
 export const isLoggedIn = () => {
@@ -74,5 +81,5 @@ export const isLoggedIn = () => {
 
 export const logOut = () => {
     Cookies.remove(COOKIE_USER);
-    <Redirect to="/" />
+    redirect('/');
 }

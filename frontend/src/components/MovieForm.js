@@ -9,7 +9,7 @@ export default function MovieForm() {
         console.log(movie);
     }
 
-    onChange = (e) => {
+    const onChange = (e) => {
         const { name, value } = e.target;
         setMovie({
             ...movie,
@@ -20,7 +20,7 @@ export default function MovieForm() {
     return (
         <>
             <form
-                class="form movie-form"
+                className="form movie-form"
                 onSubmit={onSubmit}>
 
                 <div className="form-group">

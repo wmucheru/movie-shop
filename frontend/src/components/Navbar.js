@@ -12,9 +12,7 @@ export default function Navbar() {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                 </button>
-                <Link to="/">
-                    <a className="navbar-brand">Movie Shop</a>
-                </Link>
+                <Link to="/" className="navbar-brand">Movie Shop</Link>
             </div>
 
             <div className="collapse navbar-collapse navbar-ex1-collapse">

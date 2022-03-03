@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Logout from './components/Logout';
 
@@ -7,24 +7,16 @@ import Admin from './screens/Admin';
 import Movies from './screens/Movies';
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Login />
-        </Route>
-        <Route path="/movies">
-          <Movies />
-        </Route>
-        <Route path="/admin">
-          <Admin />
-        </Route>
-        <Route path="/logout">
-          <Logout />
-        </Route>
-      </Switch>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route exact path="/" element={ <Login /> } />
+                <Route path="/movies" element={ <Movies /> } />
+                <Route path="/admin" element={ <Admin /> } />
+                <Route path="/logout" element={ <Logout /> } />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

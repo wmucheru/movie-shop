@@ -21,10 +21,9 @@ export default function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        const message = validateLogin(username);
 
-        const { error=false } = validateLogin(username);
-
-        if (error) {
+        if (message.error) {
             setMessage(message);
         }
         else {
@@ -42,7 +41,7 @@ export default function Login() {
                     null
             }
             <form
-                class="form login-form"
+                className="form login-form"
                 onSubmit={onSubmit}>
 
                 <div className="form-group">
@@ -50,6 +49,7 @@ export default function Login() {
                         type="text"
                         name="username"
                         className="form-control"
+                        autoComplete="off"
                         required
                         value={username}
                         onChange={(e) => { setUsername(e.target.value) }} />
