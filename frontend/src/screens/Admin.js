@@ -6,8 +6,10 @@ export default function Admin() {
 
     return (
         <Page title="Admin">
-            <MovieList />
-            <MovieForm />
+            <div className="page-content container">
+                <MovieList />
+                <MovieForm />
+            </div>
         </Page>
     );
 }

@@ -3,16 +3,21 @@ import { useEffect, useState } from 'react';
 import Alert from './Alert';
 import MovieCard from './MovieCard';
 
+import { MOVIES_URL } from '../utils/urls';
+
 export default function MovieList() {
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
-        fetch('http://backend:3000/api/movies')
+        fetch(MOVIES_URL)
             .then(response => {
                 if (response.statusCode === 200) {
                     return response.json();
                 }
+
+                setMessage('Could not fetch movies');
 
                 throw Error(response.statusText);
             })
@@ -21,6 +26,8 @@ export default function MovieList() {
                 setLoading(false);
             })
             .catch(e => {
+                console.log(e)
+                setMessage('Error fetching movies');
                 setLoading(false);
             });
     }, []);
@@ -42,9 +49,9 @@ export default function MovieList() {
     }
 
     return (
-        <>{loading ?
-            <div className="text-info">Loading...</div>
-            :
-            buildList(movies)}</>
+        <>
+            { message !== '' ? <Alert text={ message } type="danger" /> : null }
+            { loading ? <div className="text-info">Loading...</div> : buildList(movies) }
+        </>
     )
 }

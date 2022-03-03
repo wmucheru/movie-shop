@@ -37,34 +37,41 @@ export default function Login() {
 
     return (
         <Page title="Login">
-            {
-                message.text ?
-                    <Alert
-                        text={message.text}
-                        type={ message.error ? 'danger' : '' } /> :
-                    null
-            }
-            <form
-                className="form login-form"
-                onSubmit={onSubmit}>
+            <div className="login-box">
+                <h1>Login</h1>
 
-                <div className="form-group">
-                    <input
-                        type="text"
-                        name="username"
-                        className="form-control"
-                        autoComplete="off"
-                        required
-                        value={username}
-                        onChange={(e) => { setUsername(e.target.value) }} />
-                </div>
+                {
+                    message.text ?
+                        <Alert
+                            text={message.text}
+                            type={ message.error ? 'danger' : '' } /> :
+                        null
+                }
 
-                <div className="form-group">
-                    <button
-                        className="btn btn-lg btn-primary"
-                        disabled={username.length < 4}>Log In</button>
-                </div>
-            </form>
+                <form
+                    className="form"
+                    onSubmit={onSubmit}>
+
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Username"
+                            className="form-control"
+                            autoComplete="off"
+                            autoFocus
+                            required
+                            value={username}
+                            onChange={(e) => { setUsername(e.target.value) }} />
+                    </div>
+
+                    <div className="form-group">
+                        <button
+                            className="btn btn-lg btn-block btn-primary"
+                            disabled={username.length < 4}>Log In</button>
+                    </div>
+                </form>
+            </div>
         </Page>
     );
 }
