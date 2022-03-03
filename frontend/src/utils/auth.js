@@ -81,6 +81,11 @@ export const isLoggedIn = () => {
     return user.hasOwnProperty('username');
 }
 
+export const isAdmin = () => {
+    const user = getUser();
+    return user !== undefined && user.type === UserTypes.ADMIN;
+}
+
 export const logOut = () => {
     Cookies.remove(COOKIE_USER);
 }

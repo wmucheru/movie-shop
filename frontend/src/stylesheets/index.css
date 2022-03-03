@@ -50,6 +50,24 @@ body {
   border-radius:0;
 }
 
+.navbar-nav li span{
+  color:var(--light-grey);
+  display:inline-block;
+  padding:15px;
+  position:relative;
+}
+
+.navbar-nav li span:after {
+  border-right:1px solid var(--light-grey);
+  content:" ";
+  height:16px;
+  margin:auto;
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+}
+
 /* Login */
 .login-box{
   background:var(--white);

@@ -18,9 +18,8 @@ export default function MovieList() {
                 }
                 else {
                     setMessage('Could not fetch movies');
+                    return [];
                 }
-
-                throw Error(response.statusText);
             })
             .then(response => {
                 setMovies(response);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { validateLogin, login, isLoggedIn } from '../utils/auth'
+import { validateLogin, login, isLoggedIn, isAdmin } from '../utils/auth';
 
 import Alert from '../components/Alert';
 import Page from '../components/Page';
@@ -17,8 +17,8 @@ export default function Login() {
 
     useEffect(() => {
         if (isLoggedIn()) {
-            // Redirect to user area
-            
+            const redirectUrl = isAdmin() ? '/admin' : '/movies';
+            navigate(redirectUrl);
         }
     }, []);
 

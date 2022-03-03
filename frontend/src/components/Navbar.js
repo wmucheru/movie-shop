@@ -27,7 +27,7 @@ export default function Navbar() {
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
                         <li>
-                            <span>{user.username}</span>
+                            <span className="username">{user.username}</span>
                         </li>
                         <li>
                             <Link to="/logout">Logout</Link>
