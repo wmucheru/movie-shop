@@ -22,7 +22,7 @@ export default function MovieCard({movie, onDelete}) {
         if (window.confirm('Delete this movie?')) {
             axios.delete(`${MOVIES_URL}/${_id}`)
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
 
                     if (response.status === 200) {
                         onDelete(_id);
@@ -41,21 +41,21 @@ export default function MovieCard({movie, onDelete}) {
         if (isAdmin()) {
             return (
                 <>
-                    <Link to={`movies/${_id}`} className="btn btn-sm btn-primary">Edit</Link>
+                    <Link to={`/admin/movies/${_id}`} className="btn btn-xs btn-warning">Edit</Link>
 
                     <button
-                        className="btn btn-sm btn-danger"
+                        className="btn btn-xs btn-danger"
                         onClick={onClickDelete}>Delete</button>
                 </>
             )
         }
         else { 
-            return <button className="btn btn-sm btn-block btn-success">Rent</button>
+            return <Link to={`/movies/${_id}`} className="btn btn-sm btn-block btn-success">Rent</Link>
         }
     }
 
     return (
-        <div className="movie-card col-xs-2 col-sm-3">
+        <div className="movie-card col-xs-6 col-sm-3 col-md-2">
             <div>
                 <span className="movie-type">{type}</span>
                 <MoviePoster title={title} />

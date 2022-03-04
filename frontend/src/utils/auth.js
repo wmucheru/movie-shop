@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 const COOKIE_USER = 'user';
 
 // Allowed usernames
-const USERNAME_CUSTOMER = 'macroeyes';
+const USERNAME_CUSTOMER = 'macro';
 const USERNAME_ADMIN = 'admin';
 
 // User types

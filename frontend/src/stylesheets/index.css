@@ -19,6 +19,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size:13px;
 }
 
 .ellipsis{
@@ -116,6 +117,12 @@ body {
 }
 
 /* Movies */
+.movies-bd .page-content{
+  background:transparent;
+}
+.movie-card{
+  padding-right:0;
+}
 .movie-card>div{
   background:var(--white);
   box-shadow:var(--box-shadow);
@@ -124,14 +131,15 @@ body {
   position:relative;
 }
 .movie-type{
-  background:#EE8634;
+  background:#3274a3;
   color:var(--white);
   display:inline-block;
-  font-size:0.9em;
+  font-size:0.7em;
   padding:3px 6px;
   position:absolute;
   top:10px;
   left:10px;
+  text-transform:uppercase;
 }
 .movie-poster{
   height:12em;
@@ -140,7 +148,7 @@ body {
   object-position:center;
 }
 .movie-title{
-  font-size:1.2em;
+  font-size:1.1em;
   font-weight:bold;
   padding:5px 0;
 }
@@ -161,4 +169,17 @@ body {
 /* 404 */
 .p404-bd .page-header{
   display:none;
+}
+
+/* Rental */
+.rent-movie h2{
+  margin:0;
+}
+.rent-movie img{
+  height:auto;
+}
+span.form-control{
+  background:#eee;
+  border:0;
+  box-shadow:none;
 }

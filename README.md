@@ -1,7 +1,12 @@
 # Online Movie Shop
 
-Simple 3 screen application:
+Simple web application:
 
 - Frontend: ReactJS
 - Backend: ExpressJS
 - Database: MongoDB
+
+# Login Usernames
+
+- `admin`: Admin
+- `macro`: Customer

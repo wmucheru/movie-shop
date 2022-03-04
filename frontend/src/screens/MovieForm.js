@@ -6,17 +6,16 @@ import Page from '../components/Page';
 
 import { MOVIES_URL } from '../utils/urls';
 import axios from '../utils/axios';
+import {
+    TYPE_REGULAR,
+    TYPE_CHILDRENS_MOVIE,
+    TYPE_NEW_RELEASE,
+    MOVIE_TYPES,
+    GENRES,
+    POPULARITY
+} from '../utils/constants';
 
-// Constants
-const TYPE_REGULAR = 'Regular';
-const TYPE_CHILDRENS_MOVIE = 'Children’s Movie';
-const TYPE_NEW_RELEASE = 'New Release';
-
-const MOVIE_TYPES = [TYPE_REGULAR, TYPE_CHILDRENS_MOVIE, TYPE_NEW_RELEASE];
-const GENRES = ['Action', 'Drama', 'Romance', 'Comedy', 'Horror'];
-const POPULARITY = [1, 2, 3, 4, 5];
-
-// Helper functions
+/* Helper functions */
 const getDefaultPrice = (movieType = '') => {
     let price = 0;
 
@@ -38,18 +37,16 @@ const getDefaultPrice = (movieType = '') => {
     return price;
 }
 
-const defaultMovieObj = {
-    title: '',
-    type: '',
-    genre: '',
-    popularity: '',
-    rentalPrice: ''
-}
-
 export default function MovieForm() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const [movie, setMovie] = useState(defaultMovieObj);
+    const [movie, setMovie] = useState({
+        title: '',
+        type: '',
+        genre: '',
+        popularity: '',
+        rentalPrice: ''
+    });
 
     let navigate = useNavigate();
 
@@ -61,8 +58,8 @@ export default function MovieForm() {
         if (movieId) {
             axios.get(`${MOVIES_URL}/${movieId}`)
                 .then(response => {
+                    // console.log(response);
                     setLoading(false);
-                    console.log(response);
 
                     if (response.status === 200) {
                         setMovie(response.data);
@@ -91,7 +88,7 @@ export default function MovieForm() {
 
                 if ([200, 201].includes(response.status)) {
                     setMessage(response.data.message);
-                    setMovie(defaultMovieObj);
+                    setMovie({});
                     navigate('/admin');
                 }
                 else {

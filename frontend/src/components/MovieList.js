@@ -45,7 +45,7 @@ export default function MovieList() {
         }
 
         return (
-            <div className="row">
+            <div className="row" style={{ marginRight:0 }}>
                 {
                     movies.map((m, i) => {
                         return (

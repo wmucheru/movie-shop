@@ -22,7 +22,7 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse navbar-ex1-collapse">
                     <ul className="nav navbar-nav">
                         <li className="active">
-                            {isAdmin ?
+                            {isAdmin() ?
                                 <Link to="/admin">Admin</Link> :
                                 <Link to="/movies">Movies</Link>}
                         </li>
