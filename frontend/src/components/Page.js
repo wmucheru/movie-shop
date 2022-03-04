@@ -8,7 +8,7 @@ export default function Page({ children, title = 'Movie Shop', bodyClass='' }) {
     useEffect(() => {
         document.title = title;
         document.getElementsByTagName('body')[0].classList = [bodyClass];
-    }, []);
+    }, [title, bodyClass]);
 
     return (
         <div className="clearfix">

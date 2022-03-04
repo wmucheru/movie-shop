@@ -20,7 +20,7 @@ export default function Login() {
             const redirectUrl = isAdmin() ? '/admin' : '/movies';
             navigate(redirectUrl);
         }
-    }, []);
+    }, [navigate]);
 
     const onSubmit = (e) => {
         e.preventDefault();

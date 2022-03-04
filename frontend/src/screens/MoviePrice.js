@@ -42,7 +42,7 @@ export default function MoviePrice() {
                     setMessage('Error fetching movie');
                 });
         }
-    }, []);
+    }, [movieId]);
 
     useEffect(() => {
         const days = differenceInDays(new Date(endDate), new Date(startDate));
@@ -74,14 +74,6 @@ export default function MoviePrice() {
 
             setPrice(total);
         }
-
-        // console.clear();
-        console.log('TYPE: ', movie.type);
-        console.log('START: ', startDate, 'END: ', endDate);
-        console.log('DAYS: ', days);
-        console.log('MAX_AGE: ', movie.maximumAge);
-        console.log('RATE: ', movie.rentalPrice);
-        console.log('TOTAL: ', days);
 
     }, [startDate, endDate, movie]);
 

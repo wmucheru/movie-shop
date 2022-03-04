@@ -73,7 +73,7 @@ export default function MovieForm() {
                     setLoading(false);
                 });
         }
-    }, []);
+    }, [movieId]);
 
     const onSubmit = (e) => {
         e.preventDefault();
