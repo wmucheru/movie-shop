@@ -6,6 +6,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     restart: unless-stopped
+    ports:
+      - 3000:3000
     depends_on:
       - backend
 
@@ -13,17 +15,18 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: always
+    env_file: ./backend/.env
     ports:
-      - 8000:3000
+      - 8000:8000
     depends_on:
-      - db
+      - mongo-db
 
-  db:
+  mongo-db:
     image: mongo:5.0.2
-    restart: unless-stopped
+    restart: always
+    env_file: ./db/.env
     ports:
       - 27017:27017
-    env_file: ./db/.env
     volumes:
-      - db/data:/data/db
+      - ./db/data:/data/db
