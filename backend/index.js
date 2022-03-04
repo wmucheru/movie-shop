@@ -8,7 +8,7 @@ const movieRoute = require('./api/movies/movie.route');
 const app = express();
 
 const PORT = process.env.PORT || 8000;
-const DB_URI = process.env.DB_URI || 'mongodb://localhost:27017';
+const DB_URI = process.env.DB_URI || 'mongodb://localhost:27017/movie-shop';
 
 app.use(cors({ origin: '*' }));
 

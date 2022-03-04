@@ -4,6 +4,7 @@ import Alert from './Alert';
 import MovieCard from './MovieCard';
 
 import { MOVIES_URL } from '../utils/urls';
+import axios from '../utils/axios';
 
 export default function MovieList() {
     const [loading, setLoading] = useState(true);
@@ -11,45 +12,44 @@ export default function MovieList() {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        fetch(MOVIES_URL)
+
+        axios.get(MOVIES_URL)
             .then(response => {
-                if (response.ok) {
-                    return response.json();
+                setLoading(false);
+
+                if (response.status === 200) {
+                    setMovies(response.data);
                 }
                 else {
                     setMessage('Could not fetch movies');
-                    return [];
                 }
-            })
-            .then(response => {
-                setMovies(response);
-                setLoading(false);
             })
             .catch(e => {
                 console.log(e)
-                setMessage('Error fetching movies');
                 setLoading(false);
+                setMessage('Error fetching movies');
             });
     }, []);
 
-    const buildList = (movies) => {
+    const buildList = () => {
         if (movies === undefined || movies.length === 0) {
-            return <Alert message="No movies added" />;
+            return <Alert text="No movies added" />;
         }
-
-        return (
-            <div className="row">
-                {
-                    movies.map((m, i) => {
-                        return (
-                            <MovieCard
-                                key={i}
-                                movie={m} />
-                        );
-                    })
-                }
-            </div>
-        );
+        else {
+            return (
+                <div className="row">
+                    {
+                        movies.map((m, i) => {
+                            return (
+                                <MovieCard
+                                    key={i}
+                                    movie={m} />
+                            );
+                        })
+                    }
+                </div>
+            );
+        }
     }
 
     return (
@@ -58,7 +58,7 @@ export default function MovieList() {
                 <Alert text={message} type="danger" /> : null
             }
             {loading ?
-                <Alert text="Loading..." /> : buildList(movies)
+                <Alert text="Loading..." /> : buildList()
             }
         </>
     )

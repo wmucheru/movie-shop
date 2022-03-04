@@ -6,8 +6,39 @@ import Page from '../components/Page';
 import { MOVIES_URL } from '../utils/urls';
 import axios from '../utils/axios';
 
+// Constants
+const TYPE_REGULAR = 'Regular';
+const TYPE_CHILDRENS_MOVIE = 'Children’s Movie';
+const TYPE_NEW_RELEASE = 'New Release';
+
+const MOVIE_TYPES = [TYPE_REGULAR, TYPE_CHILDRENS_MOVIE, TYPE_NEW_RELEASE];
+const GENRES = ['Action', 'Drama', 'Romance', 'Comedy', 'Horror'];
+const POPULARITY = [1, 2, 3, 4, 5];
+
+// Helper functions
+const getDefaultPrice = (movieType = '') => {
+    let price = 0;
+
+    switch (movieType) {
+        case TYPE_CHILDRENS_MOVIE:
+            price = 0.54;
+            break;
+
+        case TYPE_NEW_RELEASE:
+            price = 1.50;
+            break;
+
+        case TYPE_REGULAR:
+        default:
+            price = 1.00;
+            break;
+    }
+
+    return price;
+}
+
 export default function MovieForm({ movieId='' }) {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [movie, setMovie] = useState({
         title: '',
@@ -33,7 +64,7 @@ export default function MovieForm({ movieId='' }) {
                     setLoading(false);
                 });
         }
-    }, [])
+    }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -54,17 +85,16 @@ export default function MovieForm({ movieId='' }) {
     const onChange = (e) => {
         const { name, value } = e.target;
 
+        // Update default price when type changes
+        if (name === 'type') {
+            movie.rentalPrice = getDefaultPrice(value);
+        }
+
         setMovie({
             ...movie,
             [name]: value
         });
     }
-
-    // console.log(movie);
-
-    const movieTypes = ['Regular', 'Children’s Movie', 'New Release'];
-    const genres = ['Action', 'Drama', 'Romance', 'Comedy', 'Horror'];
-    const popularity = [1, 2, 3, 4, 5];
 
     return (
         <Page title={movieId ? 'Edit Movie' : 'New Movie'}>
@@ -83,6 +113,7 @@ export default function MovieForm({ movieId='' }) {
                             name="title"
                             id="title"
                             autoFocus={true}
+                            autoComplete="off"
                             className="form-control"
                             required
                             value={movie.title}
@@ -94,7 +125,7 @@ export default function MovieForm({ movieId='' }) {
                     <label htmlFor="type" className="control-label col-sm-4">Type</label>
                     <div className="col-sm-8">
                         {
-                            movieTypes.map((t, i) => {
+                            MOVIE_TYPES.map((t, i) => {
                                 return (
                                     <div key={i} className="radio">
                                         <label>
@@ -118,7 +149,7 @@ export default function MovieForm({ movieId='' }) {
                     <label htmlFor="genre" className="control-label col-sm-4">Genre</label>
                     <div className="col-sm-8">
                         {
-                            genres.map((g, i) => {
+                            GENRES.map((g, i) => {
                                 return (
                                     <div key={i} className="radio">
                                         <label>
@@ -142,7 +173,7 @@ export default function MovieForm({ movieId='' }) {
                     <label htmlFor="popularity" className="control-label col-sm-4">Popularity</label>
                     <div className="col-sm-8">
                         {
-                            popularity.map((n, i) => {
+                            POPULARITY.map((n, i) => {
                                 const pNum = Number.parseInt(movie.popularity)
 
                                 return (
@@ -176,7 +207,7 @@ export default function MovieForm({ movieId='' }) {
                     </div>
                 </div>
 
-                {movie.type === 'Children’s Movie' ?
+                {movie.type === TYPE_CHILDRENS_MOVIE ?
 
                     <div className="form-group">
                         <label htmlFor="maximumAge" className="control-label col-sm-4">Release Year</label>
@@ -194,10 +225,10 @@ export default function MovieForm({ movieId='' }) {
                     : null
                 }
 
-                {movie.type === 'New Release' ?
+                {movie.type === TYPE_NEW_RELEASE ?
 
                     <div className="form-group">
-                        <label htmlFor="releaseYear" className="control-label col-sm-4">Title</label>
+                        <label htmlFor="releaseYear" className="control-label col-sm-4">Release Year</label>
                         <div className="col-sm-8">
                             <input
                                 type="number"

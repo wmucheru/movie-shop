@@ -31,7 +31,7 @@ export default function MovieCard({movie}) {
             <div>
                 <span className="movie-type">{type}</span>
                 <MoviePoster title={title} />
-                <div className="movie-title">{title}</div>
+                <div className="ellipsis movie-title">{title}</div>
                 <div className="movie-info">{genre} &middot; {`${popularity}/5`}</div>
                 <div className="movie-actions">
                     {showActionButtons()}
