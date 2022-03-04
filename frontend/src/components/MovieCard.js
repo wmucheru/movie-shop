@@ -1,23 +1,51 @@
+import { Link } from 'react-router-dom';
+
 import MoviePoster from './MoviePoster';
 
+import axios from '../utils/axios';
 import { isAdmin } from '../utils/auth';
+import { MOVIES_URL } from '../utils/urls';
 
 /**
  * 
  * Movie Card
  * 
- * Depending on the type of of user, show button for toggling price screen
+ * Depending on the type of of user, show button for toggling price screen / admin functions
  * 
 */
-export default function MovieCard({movie}) {
-    const { title, type, genre, popularity } = movie;
+export default function MovieCard({movie, onDelete}) {
+    const { _id, title, type, genre, popularity } = movie;
+
+    const onClickDelete = (e) => {
+        e.preventDefault();
+
+        if (window.confirm('Delete this movie?')) {
+            axios.delete(`${MOVIES_URL}/${_id}`)
+                .then(response => {
+                    console.log(response);
+
+                    if (response.status === 200) {
+                        onDelete(_id);
+                    }
+                    else {
+                        console.log('Could not save movie');
+                    }
+                })
+                .catch(e => {
+                    console.log('Error saving movie');
+                });
+        }
+    }
 
     const showActionButtons = () => {
         if (isAdmin()) {
             return (
                 <>
-                    <button className="btn btn-sm btn-primary">Edit</button>
-                    <button className="btn btn-sm btn-danger">Delete</button>
+                    <Link to={`movies/${_id}`} className="btn btn-sm btn-primary">Edit</Link>
+
+                    <button
+                        className="btn btn-sm btn-danger"
+                        onClick={onClickDelete}>Delete</button>
                 </>
             )
         }

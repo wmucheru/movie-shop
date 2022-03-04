@@ -16,9 +16,10 @@ export default function Admin() {
                         <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
                     </li>
                 </ul>
+
                 <div className="tab-content">
                     <div role="tabpanel" className="tab-pane active" id="movies">
-                        <Link to="/movie/new" className="btn btn-success">+ New Movie</Link>
+                        <Link to="/admin/movie/new" className="btn btn-success">+ New Movie</Link>
                         <hr />
                         <MovieList />
                     </div>

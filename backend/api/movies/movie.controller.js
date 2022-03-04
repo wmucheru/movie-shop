@@ -3,14 +3,23 @@ const Movie = require('../../models/movie');
 module.exports = {
 
     getMovies: async (req, res) => {
+        const id = req.params.id || '';
+
         try {
-            const movies = await Movie.find({}) || [];
-            res.status(200).json(movies);
+            if (id) {
+                const movie = await Movie.fetchById(id);
+                res.status(200).json(movie);
+            }
+            else {
+                const movies = await Movie.find({});
+                res.status(200).json(movies);
+            }
         }
         catch (e) {
+            console.log(e)
             res.status(500).send({
                 error: true,
-                message: e
+                message: 'Could not fetch movie'
             });
         }
     },
@@ -34,13 +43,27 @@ module.exports = {
         }
     },
 
-    updateMovie: (req, res) => {
-        const body = JSON.parse(req.body);
+    updateMovie: async (req, res) => {
+        const { _id } = req.body;
+
+        try {
+            const update = await Movie.findOneAndUpdate({ _id }, req.body);
+            console.log(update);
+
+            res.status(200).send({
+                message: 'Movie updated'
+            });
+        }
+        catch (e) {
+            res.status(500).send({
+                error: true,
+                message: e
+            });
+        }
     },
 
     deleteMovie: async (req, res) => {
-        const id = req.body.id;
-        console.log('Movie ID: ', id);
+        const id = req.params.id || '';
 
         try {
             const remove = await Movie.deleteById(id);

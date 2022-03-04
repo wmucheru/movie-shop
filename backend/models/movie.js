@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 const TYPE_REGULAR = 'Regular';
 const TYPE_CHILDRENS_MOVIE = 'Children’s Movie';
@@ -64,12 +65,12 @@ const MovieSchema = new mongoose.Schema({
  * Model functions
  * 
 */
-MovieSchema.statics.fetchById = function (_id) {
-    return this.findOne({ _id: new ObjectId(_id) });
+MovieSchema.statics.fetchById = function (id) {
+    return this.findOne({ _id: new ObjectId(id) });
 }
 
-MovieSchema.statics.deleteById = function (_id) {
-    return this.deleteOne({ _id: new ObjectId(_id) });
+MovieSchema.statics.deleteById = function (id) {
+    return this.deleteOne({ _id: new ObjectId(id) });
 }
 
 module.exports = mongoose.model('Movie', MovieSchema);

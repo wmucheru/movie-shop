@@ -31,32 +31,37 @@ export default function MovieList() {
             });
     }, []);
 
+    const onDelete = (id) => {
+        setMovies(movies.filter(m => m._id !== id));
+    }
+
     const buildList = () => {
+        if (message !== '') {
+            <Alert text={message} type="danger" />
+        }
+
         if (movies === undefined || movies.length === 0) {
             return <Alert text="No movies added" />;
         }
-        else {
-            return (
-                <div className="row">
-                    {
-                        movies.map((m, i) => {
-                            return (
-                                <MovieCard
-                                    key={i}
-                                    movie={m} />
-                            );
-                        })
-                    }
-                </div>
-            );
-        }
+
+        return (
+            <div className="row">
+                {
+                    movies.map((m, i) => {
+                        return (
+                            <MovieCard
+                                key={i}
+                                movie={m}
+                                onDelete={onDelete} />
+                        );
+                    })
+                }
+            </div>
+        );
     }
 
     return (
         <>
-            {message !== '' ?
-                <Alert text={message} type="danger" /> : null
-            }
             {loading ?
                 <Alert text="Loading..." /> : buildList()
             }

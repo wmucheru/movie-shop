@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Alert from '../components/Alert';
 import Page from '../components/Page';
@@ -37,30 +38,41 @@ const getDefaultPrice = (movieType = '') => {
     return price;
 }
 
-export default function MovieForm({ movieId='' }) {
+const defaultMovieObj = {
+    title: '',
+    type: '',
+    genre: '',
+    popularity: '',
+    rentalPrice: ''
+}
+
+export default function MovieForm() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const [movie, setMovie] = useState({
-        title: '',
-        type: '',
-        genre: '',
-        popularity: '',
-        rentalPrice: '',
-        maximumAge: '', // For children's movies
-        releaseYear: '' // For new releases
-    });
+    const [movie, setMovie] = useState(defaultMovieObj);
+
+    let navigate = useNavigate();
+
+    let params = useParams();
+    const movieId = params.movieId;
 
     useEffect(() => {
+
         if (movieId) {
-            axios.get(MOVIES_URL, movie)
+            axios.get(`${MOVIES_URL}/${movieId}`)
                 .then(response => {
-                    console.log(response)
-                    setMovie(response);
-                    setMessage(response);
                     setLoading(false);
+                    console.log(response);
+
+                    if (response.status === 200) {
+                        setMovie(response.data);
+                    }
+                    else {
+                        setMessage('Could not fetch movie');
+                    }
                 })
                 .catch(e => {
-                    setMessage('Error saving movie');
+                    setMessage('Error fetching movie');
                     setLoading(false);
                 });
         }
@@ -69,12 +81,22 @@ export default function MovieForm({ movieId='' }) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(MOVIES_URL, movie)
+        axios.request({
+            method: movieId ? 'PUT' : 'POST',
+            url: MOVIES_URL,
+            data: movie
+        })
             .then(response => {
-                console.log(response)
-                setMovie(response);
-                setMessage(response);
                 setLoading(false);
+
+                if ([200, 201].includes(response.status)) {
+                    setMessage(response.data.message);
+                    setMovie(defaultMovieObj);
+                    navigate('/admin');
+                }
+                else {
+                    setMessage('Could not save movie');
+                }
             })
             .catch(e => {
                 setMessage('Error saving movie');
@@ -99,7 +121,7 @@ export default function MovieForm({ movieId='' }) {
     return (
         <Page title={movieId ? 'Edit Movie' : 'New Movie'}>
             <form
-                className="form-horizontal movie-form col-sm-6"
+                className="form-horizontal movie-form col-sm-9 col-md-6"
                 onSubmit={onSubmit}>
 
                 {loading ? <Alert text="Saving..." /> : null}
@@ -157,6 +179,7 @@ export default function MovieForm({ movieId='' }) {
                                                 type="radio"
                                                 name="genre"
                                                 id="genre"
+                                                required
                                                 value={g}
                                                 checked={g===movie.genre}
                                                 onChange={onChange} />
@@ -182,6 +205,7 @@ export default function MovieForm({ movieId='' }) {
                                             type="radio"
                                             name="popularity"
                                             id="popularity"
+                                            required
                                             value={n}
                                             checked={n===pNum}
                                             onChange={onChange} />
@@ -210,7 +234,7 @@ export default function MovieForm({ movieId='' }) {
                 {movie.type === TYPE_CHILDRENS_MOVIE ?
 
                     <div className="form-group">
-                        <label htmlFor="maximumAge" className="control-label col-sm-4">Release Year</label>
+                        <label htmlFor="maximumAge" className="control-label col-sm-4">Maximum Age</label>
                         <div className="col-sm-8">
                             <input
                                 type="number"

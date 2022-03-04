@@ -15,10 +15,10 @@ function App() {
                 <Route exact path="/" element={<Login />} />
 
                 <Route path="/movies" element={<Movies />} />
-                <Route path="/movies/:movieId" element={<MovieForm />} />
-                <Route path="/movie/new" element={<MovieForm />} />
 
-                <Route path="/admin" element={ <Admin /> } />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/movie/new" element={<MovieForm />} />
+                <Route path="/admin/movies/:movieId" element={<MovieForm />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/*" element={<Page404 />} />
             </Routes>

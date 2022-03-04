@@ -3,7 +3,7 @@ import Page from '../components/Page';
 export default function Movies() {
 
     return (
-        <Page title="404">
+        <Page title="404" bodyClass="p404-bd">
             <div className="container text-center">
                 <h1>404</h1>
                 <p>

@@ -51,7 +51,7 @@ body {
   background:var(--white);
   border:1px solid var(--light-grey);
   border-top:0;
-  padding:2em;
+  padding:1.5em;
 }
 
 .page-header, .page-header{
@@ -119,6 +119,7 @@ body {
 .movie-card>div{
   background:var(--white);
   box-shadow:var(--box-shadow);
+  margin-bottom:2em;
   padding:10px;
   position:relative;
 }
@@ -155,4 +156,9 @@ body {
 /* Admin */
 .admin-bd .page-content{
   background:transparent!important;
+}
+
+/* 404 */
+.p404-bd .page-header{
+  display:none;
 }

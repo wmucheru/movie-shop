@@ -19,14 +19,14 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/movies', movieRoute);
 
-// Database
+app.listen(PORT, () => {
+    console.log(`Listening at ${PORT}`);
+});
+
+// Database setup
 mongoose.connect(DB_URI);
 
 const db = mongoose.connection;
 
 db.on('error', error => console.log(error));
 db.once('open', () => console.log('DB connected'));
-
-app.listen(PORT, () => {
-    console.log(`Listening at ${PORT}`);
-});
