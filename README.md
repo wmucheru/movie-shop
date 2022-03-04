@@ -6,7 +6,11 @@ Simple web application:
 - Backend: ExpressJS
 - Database: MongoDB
 
-# Login Usernames
+### Setup
+
+- Run `docker-compose up -d` to start the app
+
+### Login Usernames
 
 - `admin`: Admin
 - `macro`: Customer
