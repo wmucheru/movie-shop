@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { getUser } from '../utils/auth';
+import { getUser, isAdmin } from '../utils/auth';
 
 export default function Navbar() {
     const user = getUser();
@@ -22,7 +22,9 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse navbar-ex1-collapse">
                     <ul className="nav navbar-nav">
                         <li className="active">
-                            <Link to="/movies">Movies</Link>
+                            {isAdmin ?
+                                <Link to="/admin">Admin</Link> :
+                                <Link to="/movies">Movies</Link>}
                         </li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">

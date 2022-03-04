@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 app.use('/api/movies', movieRoute);
 
 // Database
-
 mongoose.connect(DB_URI);
 
 const db = mongoose.connection;

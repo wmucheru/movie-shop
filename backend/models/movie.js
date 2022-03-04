@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+const TYPE_REGULAR = 'Regular';
+const TYPE_CHILDRENS_MOVIE = 'Children’s Movie';
+const TYPE_NEW_RELEASE = 'New Release';
+
 const MovieSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -8,7 +12,7 @@ const MovieSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['Regular', 'Children’s Movie', 'New Release'],
+        enum: [TYPE_REGULAR, TYPE_CHILDRENS_MOVIE, TYPE_NEW_RELEASE],
         required: [true, 'Movie type is required']
     },
     genre: {
@@ -22,20 +26,50 @@ const MovieSchema = new mongoose.Schema({
         min: 1,
         max: 5
     },
+    rentalPrice: {
+        type: Number,
+        required: true,
+        default: () => {
+
+            switch (this.type) {
+                case TYPE_CHILDRENS_MOVIE:
+                    return 0.54;
+
+                case TYPE_CHILDRENS_MOVIE:
+                    return 1.50;
+
+                default:
+                    return 1;
+            }
+        }
+    },
 
     // Optional fields
     maximumAge: {
         type: Number,
         required: function () {
-            return this.type === 'Children’s Movie'
+            return this.type === TYPE_CHILDRENS_MOVIE
         }
     },
-    yearReleased: {
+    releaseYear: {
         type: Number,
         required: function () {
             return this.type === 'New Release'
         }
     }
 });
+
+/**
+ * 
+ * Model functions
+ * 
+*/
+MovieSchema.statics.fetchById = function (_id) {
+    return this.findOne({ _id: new ObjectId(_id) });
+}
+
+MovieSchema.statics.deleteById = function (_id) {
+    return this.deleteOne({ _id: new ObjectId(_id) });
+}
 
 module.exports = mongoose.model('Movie', MovieSchema);

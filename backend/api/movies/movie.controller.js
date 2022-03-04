@@ -23,7 +23,7 @@ module.exports = {
             console.log(save);
 
             res.status(201).send({
-                message: 'Movie saved'
+                message: 'Movie added'
             });
         }
         catch (e) {
@@ -36,5 +36,25 @@ module.exports = {
 
     updateMovie: (req, res) => {
         const body = JSON.parse(req.body);
+    },
+
+    deleteMovie: async (req, res) => {
+        const id = req.body.id;
+        console.log('Movie ID: ', id);
+
+        try {
+            const remove = await Movie.deleteById(id);
+            console.log(remove);
+
+            res.status(200).send({
+                message: 'Movie deleted'
+            });
+        }
+        catch (e) {
+            res.status(500).send({
+                error: true,
+                message: e
+            });
+        }
     }
 }

@@ -36,7 +36,7 @@ export default function Login() {
     }
 
     return (
-        <Page title="Login">
+        <Page title="Login" bodyClass="login-bd">
             <div className="login-box">
                 <h1>Login</h1>
 

@@ -13,7 +13,7 @@ export default function MovieList() {
     useEffect(() => {
         fetch(MOVIES_URL)
             .then(response => {
-                if (response.statusCode === 200) {
+                if (response.ok) {
                     return response.json();
                 }
                 else {
@@ -33,25 +33,33 @@ export default function MovieList() {
     }, []);
 
     const buildList = (movies) => {
-        if (movies !== undefined && movies.length > 0) {
+        if (movies === undefined || movies.length === 0) {
             return <Alert message="No movies added" />;
         }
 
         return (
-            movies.map((m, i) => {
-                return (
-                    <MovieCard
-                        key={i}
-                        movie={m} />
-                );
-            })
+            <div className="row">
+                {
+                    movies.map((m, i) => {
+                        return (
+                            <MovieCard
+                                key={i}
+                                movie={m} />
+                        );
+                    })
+                }
+            </div>
         );
     }
 
     return (
         <>
-            { loading ? <div className="text-info">Loading...</div> : buildList(movies) }
-            { message !== '' ? <Alert text={ message } type="danger" /> : null }
+            {message !== '' ?
+                <Alert text={message} type="danger" /> : null
+            }
+            {loading ?
+                <Alert text="Loading..." /> : buildList(movies)
+            }
         </>
     )
 }

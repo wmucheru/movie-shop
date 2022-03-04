@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import Alert from './Alert';
+import Alert from '../components/Alert';
+import Page from '../components/Page';
 
 import { MOVIES_URL } from '../utils/urls';
+import axios from '../utils/axios';
 
-export default function MovieForm() {
+export default function MovieForm({ movieId='' }) {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState('');
     const [movie, setMovie] = useState({
@@ -12,43 +14,41 @@ export default function MovieForm() {
         type: '',
         genre: '',
         popularity: '',
+        rentalPrice: '',
         maximumAge: '', // For children's movies
-        yearReleased: '' // For new releases
+        releaseYear: '' // For new releases
     });
+
+    useEffect(() => {
+        if (movieId) {
+            axios.get(MOVIES_URL, movie)
+                .then(response => {
+                    console.log(response)
+                    setMovie(response);
+                    setMessage(response);
+                    setLoading(false);
+                })
+                .catch(e => {
+                    setMessage('Error saving movie');
+                    setLoading(false);
+                });
+        }
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(movie);
-
-        fetch(MOVIES_URL, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify(movie)
-        })
-        .then(response => {
-            if (response.statusCode === 200) {
-                return response.json();
-            }
-            else {
-                setMessage('Could not save movie');
-            }
-
-            throw Error(response.statusText);
-        })
-        .then(response => {
-            setMovie(response);
-            setMessage(response);
-            setLoading(false);
-        })
-        .catch(e => {
-            setMessage('Error saving movie');
-            setLoading(false);
-        });
+        axios.post(MOVIES_URL, movie)
+            .then(response => {
+                console.log(response)
+                setMovie(response);
+                setMessage(response);
+                setLoading(false);
+            })
+            .catch(e => {
+                setMessage('Error saving movie');
+                setLoading(false);
+            });
     }
 
     const onChange = (e) => {
@@ -60,14 +60,14 @@ export default function MovieForm() {
         });
     }
 
-    console.log(movie);
+    // console.log(movie);
 
     const movieTypes = ['Regular', 'Children’s Movie', 'New Release'];
     const genres = ['Action', 'Drama', 'Romance', 'Comedy', 'Horror'];
     const popularity = [1, 2, 3, 4, 5];
 
     return (
-        <>
+        <Page title={movieId ? 'Edit Movie' : 'New Movie'}>
             <form
                 className="form-horizontal movie-form col-sm-6"
                 onSubmit={onSubmit}>
@@ -163,12 +163,62 @@ export default function MovieForm() {
                 </div>
 
                 <div className="form-group">
+                    <label htmlFor="rentalPrice" className="control-label col-sm-4">Rental Price ($)</label>
+                    <div className="col-sm-8">
+                        <input
+                            type="number"
+                            name="rentalPrice"
+                            id="rentalPrice"
+                            className="form-control"
+                            required
+                            value={movie.rentalPrice}
+                            onChange={onChange} />
+                    </div>
+                </div>
+
+                {movie.type === 'Children’s Movie' ?
+
+                    <div className="form-group">
+                        <label htmlFor="maximumAge" className="control-label col-sm-4">Release Year</label>
+                        <div className="col-sm-8">
+                            <input
+                                type="number"
+                                name="maximumAge"
+                                id="maximumAge"
+                                className="form-control"
+                                required
+                                value={movie.maximumAge}
+                                onChange={onChange} />
+                        </div>
+                    </div>
+                    : null
+                }
+
+                {movie.type === 'New Release' ?
+
+                    <div className="form-group">
+                        <label htmlFor="releaseYear" className="control-label col-sm-4">Title</label>
+                        <div className="col-sm-8">
+                            <input
+                                type="number"
+                                name="releaseYear"
+                                id="releaseYear"
+                                className="form-control"
+                                required
+                                value={movie.releaseYear}
+                                onChange={onChange} />
+                        </div>
+                    </div>
+                    : null
+                }
+
+                <div className="form-group">
                     <div className="col-sm-offset-4 col-sm-8">
                         <hr />
                         <button className="btn btn-lg btn-block btn-primary">Save</button>
                     </div>
                 </div>
             </form>
-        </>
+        </Page>
     );
 }
