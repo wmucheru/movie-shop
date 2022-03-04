@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "622207fb245c7a2408b3c1d0"
+  },
+  "title": "Avengers 5",
+  "type": "Children’s Movie",
+  "genre": "Action",
+  "popularity": 5,
+  "rentalPrice": 0.54,
+  "maximumAge": 13,
+  "releaseYear": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62220a28245c7a2408b3c1d3"
+  },
+  "title": "Bourne Ultimatum",
+  "type": "New Release",
+  "genre": "Action",
+  "popularity": 4,
+  "rentalPrice": 1.5,
+  "maximumAge": null,
+  "releaseYear": 2000,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62220aaf245c7a2408b3c1d5"
+  },
+  "title": "Twilight",
+  "type": "Children’s Movie",
+  "genre": "Romance",
+  "popularity": 4,
+  "rentalPrice": 0.54,
+  "maximumAge": 16,
+  "releaseYear": 2000,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62220ada245c7a2408b3c1d7"
+  },
+  "title": "Power Rangers",
+  "type": "Children’s Movie",
+  "genre": "Drama",
+  "popularity": 5,
+  "rentalPrice": 0.54,
+  "maximumAge": 12,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62221cbf48a4e3cd64b2b648"
+  },
+  "title": "Death Race",
+  "type": "New Release",
+  "genre": "Action",
+  "popularity": 5,
+  "rentalPrice": 1.5,
+  "releaseYear": 2021,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62221d4048a4e3cd64b2b64a"
+  },
+  "title": "Jack & the Beanstalk",
+  "type": "Children’s Movie",
+  "genre": "Comedy",
+  "popularity": 4,
+  "rentalPrice": 0.54,
+  "maximumAge": 12,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6222583b67e237e9ed39186a"
+  },
+  "title": "Ant Man",
+  "type": "Regular",
+  "genre": "Action",
+  "popularity": 5,
+  "rentalPrice": 1,
+  "__v": 0
+}]
