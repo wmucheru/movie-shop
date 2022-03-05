@@ -29,13 +29,11 @@ export default function SettingForm() {
     }, [SETTINGS_URL]);
 
     const onSave = () => {
-        console.log(settings);
-
         axios.put(SETTINGS_URL, {
             settings: JSON.stringify(settings)
         })
             .then(response => {
-                console.log(response);
+                // console.log(response);
 
                 if (response.status === 200) {
                     setMessage(response.data.message);
@@ -81,6 +79,7 @@ export default function SettingForm() {
                                         className="form-control"
                                         value={s.value}
                                         onChange={e => onChange(i, e)}
+                                        autoComplete="off"
                                         required />
                                 </div>
                             </div>

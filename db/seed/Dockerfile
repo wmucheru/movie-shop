@@ -1,5 +1,6 @@
 FROM mongo:5.0.2
 
-COPY movies.json /movies.json
+COPY *.json .
+COPY import.sh .
 
 CMD ["./import.sh"]
