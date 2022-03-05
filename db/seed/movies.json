@@ -3,7 +3,7 @@
     "$oid": "622207fb245c7a2408b3c1d0"
   },
   "title": "Avengers 5",
-  "type": "Children’s Movie",
+  "type": "Regular",
   "genre": "Action",
   "popularity": 5,
   "rentalPrice": 0.54,
@@ -27,7 +27,7 @@
     "$oid": "62220aaf245c7a2408b3c1d5"
   },
   "title": "Twilight",
-  "type": "Children’s Movie",
+  "type": "Regular",
   "genre": "Romance",
   "popularity": 4,
   "rentalPrice": 0.54,

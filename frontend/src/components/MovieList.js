@@ -35,9 +35,9 @@ export default function MovieList() {
         setMovies(movies.filter(m => m._id !== id));
     }
 
-    const buildList = () => {
+    const listMovies = () => {
         if (message !== '') {
-            <Alert text={message} type="danger" />
+            return <Alert text={message} type="danger" />
         }
 
         if (movies === undefined || movies.length === 0) {
@@ -63,7 +63,7 @@ export default function MovieList() {
     return (
         <>
             {loading ?
-                <Alert text="Loading..." /> : buildList()
+                <Alert text="Loading..." /> : listMovies()
             }
         </>
     )

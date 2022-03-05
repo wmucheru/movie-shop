@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const movieRoute = require('./api/movies/movie.route');
+const settingRoute = require('./api/settings/setting.route');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/movies', movieRoute);
+app.use('/api/settings', settingRoute);
 
 app.listen(PORT, () => {
     console.log(`Listening at ${PORT}`);

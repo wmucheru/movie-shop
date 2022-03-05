@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import Page from '../components/Page';
 import MovieList from '../components/MovieList';
+import SettingForm from '../components/SettingForm';
 
 export default function Admin() {
 
@@ -23,8 +24,8 @@ export default function Admin() {
                         <hr />
                         <MovieList />
                     </div>
-                    <div role="tabpanel" className="tab-pane" id="settings">
-
+                    <div role="tabpanel" className="tab-pane clearfix" id="settings">
+                        <SettingForm />
                     </div>
                 </div>
             </div>

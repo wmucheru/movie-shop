@@ -1,0 +1,8 @@
+[{
+  "_id": {
+    "$oid": "622322ab1f05fb093685c3e2"
+  },
+  "name": "Max Rentals",
+  "description": "Maximum no. of rentals a customer can have",
+  "value": "10"
+}]

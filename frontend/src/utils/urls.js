@@ -4,3 +4,4 @@ const apiURL = `${baseURL}/api`;
 // const uploadsURL = `${baseURL}/uploads`;
 
 export const MOVIES_URL = `${apiURL}/movies`;
+export const SETTINGS_URL = `${apiURL}/settings`;
