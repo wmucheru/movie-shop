@@ -28,7 +28,9 @@ export default function SettingForm() {
 
     }, [SETTINGS_URL]);
 
-    const onSave = () => {
+    const onSave = (e) => {
+        e.preventDefault();
+
         axios.put(SETTINGS_URL, {
             settings: JSON.stringify(settings)
         })
@@ -91,16 +93,20 @@ export default function SettingForm() {
     }
 
     return (
-        <div className="col-sm-6 form-horizontal">
-            {listSettings()}
-            <div className="form-group">
-                <div className="col-sm-offset-4 col-sm-8">
-                    <hr />
-                    <button
-                        className="btn btn-lg btn-block btn-primary"
-                        onClick={onSave}>Save</button>
+        <div>
+            <form
+                className="col-sm-6 form-horizontal"
+                onSubmit={onSave}>
+
+                {listSettings()}
+                <div className="form-group">
+                    <div className="col-sm-offset-4 col-sm-8">
+                        <hr />
+                        <button className="btn btn-lg btn-block btn-primary">Save</button>
+                    </div>
                 </div>
-            </div>
+            </form>
+            
         </div>
     );
 }

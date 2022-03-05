@@ -54,7 +54,6 @@ export default function MovieForm() {
     const movieId = params.movieId;
 
     useEffect(() => {
-
         if (movieId) {
             axios.get(`${MOVIES_URL}/${movieId}`)
                 .then(response => {
@@ -96,6 +95,7 @@ export default function MovieForm() {
                 }
             })
             .catch(e => {
+                console.log(e);
                 setMessage('Error saving movie');
                 setLoading(false);
             });
@@ -105,8 +105,11 @@ export default function MovieForm() {
         const { name, value } = e.target;
 
         // Update default price when type changes
+        // Reset optional values as well
         if (name === 'type') {
             movie.rentalPrice = getDefaultPrice(value);
+            movie.maximumAge = '';
+            movie.releaseYear = '';
         }
 
         setMovie({

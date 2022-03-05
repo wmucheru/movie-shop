@@ -77,7 +77,7 @@ export default function MoviePrice() {
 
     }, [startDate, endDate, movie]);
 
-    const { title, type, rentalPrice, maximumAge=0, releaseYear=0 } = movie;
+    const { title, type, rentalPrice, maximumAge, releaseYear } = movie;
 
     return (
         <Page title="Rent Movie">

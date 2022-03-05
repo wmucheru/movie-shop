@@ -7,8 +7,6 @@
   "genre": "Action",
   "popularity": 5,
   "rentalPrice": 0.54,
-  "maximumAge": 13,
-  "releaseYear": null,
   "__v": 0
 },{
   "_id": {
@@ -19,7 +17,6 @@
   "genre": "Action",
   "popularity": 4,
   "rentalPrice": 1.5,
-  "maximumAge": null,
   "releaseYear": 2000,
   "__v": 0
 },{
@@ -31,8 +28,6 @@
   "genre": "Romance",
   "popularity": 4,
   "rentalPrice": 0.54,
-  "maximumAge": 16,
-  "releaseYear": 2000,
   "__v": 0
 },{
   "_id": {

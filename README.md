@@ -15,7 +15,7 @@ DOCKER
 
 NODE
 
-- Backend: `cd backend && npm install && npm start`
+- Backend: `cd backend && npm install && npm start`: [](http://localhost:8000)
 - Frontend: `cd frontend && yarn install && yarn start`
 - Set up and start your local mongdb instance
 
