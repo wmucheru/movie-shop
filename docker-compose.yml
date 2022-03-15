@@ -17,7 +17,8 @@ services:
     build:
       context: ./backend
     restart: always
-    env_file: ./backend/.env
+    environment:
+      DB_URI: "mongodb://mongo-db:27017/movie-shop"
     ports:
       - 8000:8000
     volumes:
@@ -29,7 +30,9 @@ services:
   mongo-db:
     image: mongo:5.0.2
     restart: always
-    env_file: ./db/.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 
+      MONGO_INITDB_ROOT_PASSWORD: 
     ports:
       - 27017:27017
     volumes:
