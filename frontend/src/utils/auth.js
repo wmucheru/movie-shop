@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const COOKIE_USER = 'user';
+const COOKIE_USER = 'test-user';
 
 // Allowed usernames
 const USERNAME_CUSTOMER = 'macro';
